@@ -23,7 +23,7 @@ func NewGroupLogger(dir string, appName string, logSlice []string) *GroupLogger 
 			continue
 		}
 		downloadLogger := NewPeriodLogger(appName, sliceName, filepath.Join(dir, sliceName), false)
-		gl.loggerMap["sliceName"] = downloadLogger
+		gl.loggerMap[sliceName] = downloadLogger
 	}
 
 	return gl
