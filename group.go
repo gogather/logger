@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"io"
 	"path/filepath"
 )
 
@@ -37,4 +38,14 @@ func (gl *GroupLogger) L(group string) *Logger {
 		return NewLogger(d.Ls, v.Ls)
 	}
 	return NewLogger(d.Ls, nil)
+}
+
+// W get the log writer
+func (gl *GroupLogger) W(group string) io.Writer {
+	d := gl.defaultLogger
+	v, ok := gl.loggerMap[group]
+	if ok {
+		return v.gFile
+	}
+	return d.gFile
 }
