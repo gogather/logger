@@ -1,5 +1,7 @@
 ### logger
 
+[![Build Status](https://travis-ci.org/gogather/logger.svg?branch=master)](https://travis-ci.org/gogather/logger) [![Go Report Card](https://goreportcard.com/badge/github.com/gogather/logger)](https://goreportcard.com/report/github.com/gogather/logger)
+
 日志(just a logger)
 
 ##### 特性(features)
