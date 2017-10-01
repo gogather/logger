@@ -1,21 +1,25 @@
 package logger
 
 import (
+	"github.com/gogather/cleaner"
 	"io"
 	"path/filepath"
+	"time"
 )
 
 // GroupLogger print group period log
 type GroupLogger struct {
 	loggerMap     map[string]*PeriodLogger
 	defaultLogger *PeriodLogger
+	expire        time.Duration
 }
 
 // NewGroupLogger new a group logger manager
-func NewGroupLogger(dir string, appName string, logSlice []string) *GroupLogger {
+func NewGroupLogger(dir string, appName string, expire time.Duration, logSlice []string) *GroupLogger {
 	gl := &GroupLogger{
 		loggerMap:     map[string]*PeriodLogger{},
 		defaultLogger: NewPeriodLogger(appName, "", dir, true),
+		expire:        expire,
 	}
 
 	for i := 0; i < len(logSlice); i++ {
@@ -25,6 +29,11 @@ func NewGroupLogger(dir string, appName string, logSlice []string) *GroupLogger 
 		}
 		downloadLogger := NewPeriodLogger(appName, sliceName, filepath.Join(dir, sliceName), false)
 		gl.loggerMap[sliceName] = downloadLogger
+	}
+
+	if expire > time.Hour*24 {
+		fc := cleaner.New(dir, gl.expire, time.Hour, -1)
+		fc.StartCleanTask()
 	}
 
 	return gl
