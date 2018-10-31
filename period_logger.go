@@ -56,6 +56,7 @@ func (l *PeriodLogger) setLog(logDir string, appName string) error {
 	if l.isDefault {
 		log.SetOutput(l.gFile)
 		log.SetFlags(l.flag)
+		log.SetPrefix("[INFO]")
 	}
 
 	l.Ls = log.New(l.gFile, "", l.flag)
