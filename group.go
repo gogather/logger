@@ -35,10 +35,12 @@ func NewGroupLogger(dir string, appName string, expire time.Duration, logSlice [
 		gl.loggerMap[sliceName] = downloadLogger
 	}
 
-	if expire > time.Hour*24 {
-		fc := cleaner.New(dir, gl.expire, time.Hour, -1)
-		fc.StartCleanTask()
+	if expire < time.Hour*24 {
+		gl.expire = time.Hour * 24
 	}
+
+	fc := cleaner.New(dir, gl.expire, time.Hour, -1)
+	fc.StartCleanTask()
 
 	return gl
 }
