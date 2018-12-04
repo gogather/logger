@@ -9,18 +9,27 @@ import (
 // GROUP option for enable group log
 var GROUP = true
 
+const (
+	INFO  = 1 // 0001
+	DEBUG = 2 // 0010
+	WARN  = 4 // 0100
+	ERROR = 8 // 1000
+)
+
 // Logger a logger
 type Logger struct {
-	d  *log.Logger
-	v  *log.Logger
-	mu sync.Mutex
+	level int
+	d     *log.Logger
+	v     *log.Logger
+	mu    sync.Mutex
 }
 
 // NewLogger new a logger
-func NewLogger(defaultLogger *log.Logger, v *log.Logger) *Logger {
+func NewLogger(defaultLogger *log.Logger, v *log.Logger, lv int) *Logger {
 	return &Logger{
-		d: defaultLogger,
-		v: v,
+		d:     defaultLogger,
+		v:     v,
+		level: lv,
 	}
 }
 
@@ -28,6 +37,9 @@ func NewLogger(defaultLogger *log.Logger, v *log.Logger) *Logger {
 func (l *Logger) Println(v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&INFO <= 0 {
+		return
+	}
 	l.d.SetPrefix("[INFO]")
 	l.d.Output(2, fmt.Sprintln(v...))
 	if GROUP {
@@ -39,6 +51,9 @@ func (l *Logger) Println(v ...interface{}) {
 func (l *Logger) Printf(format string, v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&INFO <= 0 {
+		return
+	}
 	l.d.SetPrefix("[INFO]")
 	l.d.Output(2, fmt.Sprintf(format, v...))
 	if GROUP && l.v != nil {
@@ -50,6 +65,9 @@ func (l *Logger) Printf(format string, v ...interface{}) {
 func (l *Logger) Print(v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&INFO <= 0 {
+		return
+	}
 	l.d.SetPrefix("[INFO]")
 	l.d.Output(2, fmt.Sprint(v...))
 	if GROUP && l.v != nil {
@@ -63,6 +81,9 @@ func (l *Logger) Print(v ...interface{}) {
 func (l *Logger) Debugln(v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&DEBUG <= 0 {
+		return
+	}
 	l.d.SetPrefix("[DEBUG]")
 	l.d.Output(2, fmt.Sprintln(v...))
 	if GROUP {
@@ -74,6 +95,9 @@ func (l *Logger) Debugln(v ...interface{}) {
 func (l *Logger) Debugf(format string, v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&DEBUG <= 0 {
+		return
+	}
 	l.d.SetPrefix("[DEBUG]")
 	l.d.Output(2, fmt.Sprintf(format, v...))
 	if GROUP && l.v != nil {
@@ -85,6 +109,9 @@ func (l *Logger) Debugf(format string, v ...interface{}) {
 func (l *Logger) Debug(v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&DEBUG <= 0 {
+		return
+	}
 	l.d.SetPrefix("[DEBUG]")
 	l.d.Output(2, fmt.Sprint(v...))
 	if GROUP && l.v != nil {
@@ -98,6 +125,9 @@ func (l *Logger) Debug(v ...interface{}) {
 func (l *Logger) Infoln(v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&INFO <= 0 {
+		return
+	}
 	l.d.SetPrefix("[INFO]")
 	l.d.Output(2, fmt.Sprintln(v...))
 	if GROUP {
@@ -109,6 +139,9 @@ func (l *Logger) Infoln(v ...interface{}) {
 func (l *Logger) Infof(format string, v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&INFO <= 0 {
+		return
+	}
 	l.d.SetPrefix("[INFO]")
 	l.d.Output(2, fmt.Sprintf(format, v...))
 	if GROUP && l.v != nil {
@@ -120,6 +153,9 @@ func (l *Logger) Infof(format string, v ...interface{}) {
 func (l *Logger) Info(v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&INFO <= 0 {
+		return
+	}
 	l.d.SetPrefix("[INFO]")
 	l.d.Output(2, fmt.Sprint(v...))
 	if GROUP && l.v != nil {
@@ -133,6 +169,9 @@ func (l *Logger) Info(v ...interface{}) {
 func (l *Logger) Warnln(v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&WARN <= 0 {
+		return
+	}
 	l.d.SetPrefix("[WARN]")
 	l.d.Output(2, fmt.Sprintln(v...))
 	if GROUP {
@@ -144,6 +183,9 @@ func (l *Logger) Warnln(v ...interface{}) {
 func (l *Logger) Warnf(format string, v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&WARN <= 0 {
+		return
+	}
 	l.d.SetPrefix("[WARN]")
 	l.d.Output(2, fmt.Sprintf(format, v...))
 	if GROUP && l.v != nil {
@@ -155,6 +197,9 @@ func (l *Logger) Warnf(format string, v ...interface{}) {
 func (l *Logger) Warn(v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&WARN <= 0 {
+		return
+	}
 	l.d.SetPrefix("[WARN]")
 	l.d.Output(2, fmt.Sprint(v...))
 	if GROUP && l.v != nil {
@@ -168,6 +213,9 @@ func (l *Logger) Warn(v ...interface{}) {
 func (l *Logger) Errorln(v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&ERROR <= 0 {
+		return
+	}
 	l.d.SetPrefix("[ERROR]")
 	l.d.Output(2, fmt.Sprintln(v...))
 	if GROUP {
@@ -179,6 +227,9 @@ func (l *Logger) Errorln(v ...interface{}) {
 func (l *Logger) Errorf(format string, v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&ERROR <= 0 {
+		return
+	}
 	l.d.SetPrefix("[ERROR]")
 	l.d.Output(2, fmt.Sprintf(format, v...))
 	if GROUP && l.v != nil {
@@ -190,6 +241,9 @@ func (l *Logger) Errorf(format string, v ...interface{}) {
 func (l *Logger) Error(v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.level&ERROR <= 0 {
+		return
+	}
 	l.d.SetPrefix("[ERROR]")
 	l.d.Output(2, fmt.Sprint(v...))
 	if GROUP && l.v != nil {
