@@ -45,6 +45,12 @@ func NewGroupLogger(dir string, appName string, expire time.Duration, logSlice [
 	return gl
 }
 
+// default logger
+func (gl *GroupLogger) D() *Logger {
+	d := gl.defaultLogger
+	return NewLogger(d.Ls, nil, gl.level)
+}
+
 // L get the logger from group logger
 func (gl *GroupLogger) L(group string) *Logger {
 	d := gl.defaultLogger
