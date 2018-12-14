@@ -19,6 +19,7 @@ type Logger struct {
 	d     *log.Logger
 	v     *log.Logger
 	mu    sync.Mutex
+	depth int
 }
 
 // NewLogger new a logger
@@ -27,7 +28,13 @@ func NewLogger(defaultLogger *log.Logger, v *log.Logger, lv int) *Logger {
 		d:     defaultLogger,
 		v:     v,
 		level: lv,
+		depth: 2,
 	}
+}
+
+// set depth
+func (l *Logger) SetDepth(depth int) {
+	l.depth = depth
 }
 
 // Print
@@ -38,10 +45,10 @@ func (l *Logger) Println(v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[INFO]")
-	l.d.Output(2, fmt.Sprintln(v...))
+	l.d.Output(l.depth, fmt.Sprintln(v...))
 	if l.v != nil {
 		l.v.SetPrefix("[INFO]")
-		l.v.Output(2, fmt.Sprintln(v...))
+		l.v.Output(l.depth, fmt.Sprintln(v...))
 	}
 }
 
@@ -52,10 +59,10 @@ func (l *Logger) Printf(format string, v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[INFO]")
-	l.d.Output(2, fmt.Sprintf(format, v...))
+	l.d.Output(l.depth, fmt.Sprintf(format, v...))
 	if l.v != nil {
 		l.v.SetPrefix("[INFO]")
-		l.v.Output(2, fmt.Sprintf(format, v...))
+		l.v.Output(l.depth, fmt.Sprintf(format, v...))
 	}
 }
 
@@ -66,10 +73,10 @@ func (l *Logger) Print(v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[INFO]")
-	l.d.Output(2, fmt.Sprint(v...))
+	l.d.Output(l.depth, fmt.Sprint(v...))
 	if l.v != nil {
 		l.v.SetPrefix("[INFO]")
-		l.v.Output(2, fmt.Sprint(v...))
+		l.v.Output(l.depth, fmt.Sprint(v...))
 	}
 }
 
@@ -82,10 +89,10 @@ func (l *Logger) Debugln(v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[DEBUG]")
-	l.d.Output(2, fmt.Sprintln(v...))
+	l.d.Output(l.depth, fmt.Sprintln(v...))
 	if l.v != nil {
 		l.v.SetPrefix("[DEBUG]")
-		l.v.Output(2, fmt.Sprintln(v...))
+		l.v.Output(l.depth, fmt.Sprintln(v...))
 	}
 }
 
@@ -96,10 +103,10 @@ func (l *Logger) Debugf(format string, v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[DEBUG]")
-	l.d.Output(2, fmt.Sprintf(format, v...))
+	l.d.Output(l.depth, fmt.Sprintf(format, v...))
 	if l.v != nil {
 		l.v.SetPrefix("[DEBUG]")
-		l.v.Output(2, fmt.Sprintf(format, v...))
+		l.v.Output(l.depth, fmt.Sprintf(format, v...))
 	}
 }
 
@@ -110,10 +117,10 @@ func (l *Logger) Debug(v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[DEBUG]")
-	l.d.Output(2, fmt.Sprint(v...))
+	l.d.Output(l.depth, fmt.Sprint(v...))
 	if l.v != nil {
 		l.v.SetPrefix("[DEBUG]")
-		l.v.Output(2, fmt.Sprint(v...))
+		l.v.Output(l.depth, fmt.Sprint(v...))
 	}
 }
 
@@ -126,10 +133,10 @@ func (l *Logger) Infoln(v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[INFO]")
-	l.d.Output(2, fmt.Sprintln(v...))
+	l.d.Output(l.depth, fmt.Sprintln(v...))
 	if l.v != nil {
 		l.v.SetPrefix("[INFO]")
-		l.v.Output(2, fmt.Sprintln(v...))
+		l.v.Output(l.depth, fmt.Sprintln(v...))
 	}
 }
 
@@ -140,10 +147,10 @@ func (l *Logger) Infof(format string, v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[INFO]")
-	l.d.Output(2, fmt.Sprintf(format, v...))
+	l.d.Output(l.depth, fmt.Sprintf(format, v...))
 	if l.v != nil {
 		l.v.SetPrefix("[INFO]")
-		l.v.Output(2, fmt.Sprintf(format, v...))
+		l.v.Output(l.depth, fmt.Sprintf(format, v...))
 	}
 }
 
@@ -154,10 +161,10 @@ func (l *Logger) Info(v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[INFO]")
-	l.d.Output(2, fmt.Sprint(v...))
+	l.d.Output(l.depth, fmt.Sprint(v...))
 	if l.v != nil {
 		l.v.SetPrefix("[INFO]")
-		l.v.Output(2, fmt.Sprint(v...))
+		l.v.Output(l.depth, fmt.Sprint(v...))
 	}
 }
 
@@ -170,10 +177,10 @@ func (l *Logger) Warnln(v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[WARN]")
-	l.d.Output(2, fmt.Sprintln(v...))
+	l.d.Output(l.depth, fmt.Sprintln(v...))
 	if l.v != nil {
 		l.v.SetPrefix("[WARN]")
-		l.v.Output(2, fmt.Sprintln(v...))
+		l.v.Output(l.depth, fmt.Sprintln(v...))
 	}
 }
 
@@ -184,10 +191,10 @@ func (l *Logger) Warnf(format string, v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[WARN]")
-	l.d.Output(2, fmt.Sprintf(format, v...))
+	l.d.Output(l.depth, fmt.Sprintf(format, v...))
 	if l.v != nil {
 		l.v.SetPrefix("[WARN]")
-		l.v.Output(2, fmt.Sprintf(format, v...))
+		l.v.Output(l.depth, fmt.Sprintf(format, v...))
 	}
 }
 
@@ -198,10 +205,10 @@ func (l *Logger) Warn(v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[WARN]")
-	l.d.Output(2, fmt.Sprint(v...))
+	l.d.Output(l.depth, fmt.Sprint(v...))
 	if l.v != nil {
 		l.v.SetPrefix("[WARN]")
-		l.v.Output(2, fmt.Sprint(v...))
+		l.v.Output(l.depth, fmt.Sprint(v...))
 	}
 }
 
@@ -214,10 +221,10 @@ func (l *Logger) Errorln(v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[ERROR]")
-	l.d.Output(2, fmt.Sprintln(v...))
+	l.d.Output(l.depth, fmt.Sprintln(v...))
 	if l.v != nil {
 		l.v.SetPrefix("[ERROR]")
-		l.v.Output(2, fmt.Sprintln(v...))
+		l.v.Output(l.depth, fmt.Sprintln(v...))
 	}
 }
 
@@ -228,10 +235,10 @@ func (l *Logger) Errorf(format string, v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[ERROR]")
-	l.d.Output(2, fmt.Sprintf(format, v...))
+	l.d.Output(l.depth, fmt.Sprintf(format, v...))
 	if l.v != nil {
 		l.v.SetPrefix("[ERROR]")
-		l.v.Output(2, fmt.Sprintf(format, v...))
+		l.v.Output(l.depth, fmt.Sprintf(format, v...))
 	}
 }
 
@@ -242,10 +249,10 @@ func (l *Logger) Error(v ...interface{}) {
 		return
 	}
 	l.d.SetPrefix("[ERROR]")
-	l.d.Output(2, fmt.Sprint(v...))
+	l.d.Output(l.depth, fmt.Sprint(v...))
 	if l.v != nil {
 		l.v.SetPrefix("[ERROR]")
-		l.v.Output(2, fmt.Sprint(v...))
+		l.v.Output(l.depth, fmt.Sprint(v...))
 	}
 }
 
