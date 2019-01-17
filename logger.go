@@ -44,11 +44,12 @@ func (l *Logger) Println(v ...interface{}) {
 	if l.level&INFO <= 0 {
 		return
 	}
-	l.d.SetPrefix("[I]")
-	l.d.Output(l.depth, fmt.Sprintln(v...))
+	content := fmt.Sprintln(v...)
+	l.d.SetPrefix("[I] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[I]")
-		l.v.Output(l.depth, fmt.Sprintln(v...))
+		l.v.SetPrefix("[I] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -58,11 +59,12 @@ func (l *Logger) Printf(format string, v ...interface{}) {
 	if l.level&INFO <= 0 {
 		return
 	}
-	l.d.SetPrefix("[I]")
-	l.d.Output(l.depth, fmt.Sprintf(format, v...))
+	content := fmt.Sprintf(format, v...)
+	l.d.SetPrefix("[I] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[I]")
-		l.v.Output(l.depth, fmt.Sprintf(format, v...))
+		l.v.SetPrefix("[I] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -72,11 +74,12 @@ func (l *Logger) Print(v ...interface{}) {
 	if l.level&INFO <= 0 {
 		return
 	}
-	l.d.SetPrefix("[I]")
-	l.d.Output(l.depth, fmt.Sprint(v...))
+	content := fmt.Sprint(v...)
+	l.d.SetPrefix("[I] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[I]")
-		l.v.Output(l.depth, fmt.Sprint(v...))
+		l.v.SetPrefix("[I] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -88,11 +91,12 @@ func (l *Logger) Debugln(v ...interface{}) {
 	if l.level&DEBUG <= 0 {
 		return
 	}
-	l.d.SetPrefix("[D]")
-	l.d.Output(l.depth, fmt.Sprintln(v...))
+	content := fmt.Sprintln(v...)
+	l.d.SetPrefix("[D] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[D]")
-		l.v.Output(l.depth, fmt.Sprintln(v...))
+		l.v.SetPrefix("[D] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -102,11 +106,12 @@ func (l *Logger) Debugf(format string, v ...interface{}) {
 	if l.level&DEBUG <= 0 {
 		return
 	}
-	l.d.SetPrefix("[D]")
-	l.d.Output(l.depth, fmt.Sprintf(format, v...))
+	content := fmt.Sprintf(format, v...)
+	l.d.SetPrefix("[D] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[D]")
-		l.v.Output(l.depth, fmt.Sprintf(format, v...))
+		l.v.SetPrefix("[D] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -116,11 +121,12 @@ func (l *Logger) Debug(v ...interface{}) {
 	if l.level&DEBUG <= 0 {
 		return
 	}
-	l.d.SetPrefix("[D]")
-	l.d.Output(l.depth, fmt.Sprint(v...))
+	content := fmt.Sprint(v...)
+	l.d.SetPrefix("[D] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[D]")
-		l.v.Output(l.depth, fmt.Sprint(v...))
+		l.v.SetPrefix("[D] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -132,11 +138,12 @@ func (l *Logger) Infoln(v ...interface{}) {
 	if l.level&INFO <= 0 {
 		return
 	}
-	l.d.SetPrefix("[I]")
-	l.d.Output(l.depth, fmt.Sprintln(v...))
+	content := fmt.Sprintln(v...)
+	l.d.SetPrefix("[I] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[I]")
-		l.v.Output(l.depth, fmt.Sprintln(v...))
+		l.v.SetPrefix("[I] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -146,11 +153,12 @@ func (l *Logger) Infof(format string, v ...interface{}) {
 	if l.level&INFO <= 0 {
 		return
 	}
-	l.d.SetPrefix("[I]")
-	l.d.Output(l.depth, fmt.Sprintf(format, v...))
+	content := fmt.Sprintf(format, v...)
+	l.d.SetPrefix("[I] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[I]")
-		l.v.Output(l.depth, fmt.Sprintf(format, v...))
+		l.v.SetPrefix("[I] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -160,11 +168,12 @@ func (l *Logger) Info(v ...interface{}) {
 	if l.level&INFO <= 0 {
 		return
 	}
-	l.d.SetPrefix("[I]")
-	l.d.Output(l.depth, fmt.Sprint(v...))
+	content := fmt.Sprint(v...)
+	l.d.SetPrefix("[I] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[I]")
-		l.v.Output(l.depth, fmt.Sprint(v...))
+		l.v.SetPrefix("[I] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -176,11 +185,12 @@ func (l *Logger) Warnln(v ...interface{}) {
 	if l.level&WARN <= 0 {
 		return
 	}
-	l.d.SetPrefix("[W]")
-	l.d.Output(l.depth, fmt.Sprintln(v...))
+	content := fmt.Sprintln(v...)
+	l.d.SetPrefix("[W] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[W]")
-		l.v.Output(l.depth, fmt.Sprintln(v...))
+		l.v.SetPrefix("[W] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -190,11 +200,12 @@ func (l *Logger) Warnf(format string, v ...interface{}) {
 	if l.level&WARN <= 0 {
 		return
 	}
-	l.d.SetPrefix("[W]")
-	l.d.Output(l.depth, fmt.Sprintf(format, v...))
+	content := fmt.Sprintf(format, v...)
+	l.d.SetPrefix("[W] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[W]")
-		l.v.Output(l.depth, fmt.Sprintf(format, v...))
+		l.v.SetPrefix("[W] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -204,11 +215,12 @@ func (l *Logger) Warn(v ...interface{}) {
 	if l.level&WARN <= 0 {
 		return
 	}
-	l.d.SetPrefix("[W]")
-	l.d.Output(l.depth, fmt.Sprint(v...))
+	content := fmt.Sprint(v...)
+	l.d.SetPrefix("[W] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[W]")
-		l.v.Output(l.depth, fmt.Sprint(v...))
+		l.v.SetPrefix("[W] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -220,11 +232,12 @@ func (l *Logger) Errorln(v ...interface{}) {
 	if l.level&ERROR <= 0 {
 		return
 	}
-	l.d.SetPrefix("[E]")
-	l.d.Output(l.depth, fmt.Sprintln(v...))
+	content := fmt.Sprintln(v...)
+	l.d.SetPrefix("[E] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[E]")
-		l.v.Output(l.depth, fmt.Sprintln(v...))
+		l.v.SetPrefix("[E] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -234,11 +247,12 @@ func (l *Logger) Errorf(format string, v ...interface{}) {
 	if l.level&ERROR <= 0 {
 		return
 	}
-	l.d.SetPrefix("[E]")
-	l.d.Output(l.depth, fmt.Sprintf(format, v...))
+	content := fmt.Sprintf(format, v...)
+	l.d.SetPrefix("[E] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[E]")
-		l.v.Output(l.depth, fmt.Sprintf(format, v...))
+		l.v.SetPrefix("[E] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
@@ -248,11 +262,12 @@ func (l *Logger) Error(v ...interface{}) {
 	if l.level&ERROR <= 0 {
 		return
 	}
-	l.d.SetPrefix("[E]")
-	l.d.Output(l.depth, fmt.Sprint(v...))
+	content := fmt.Sprint(v...)
+	l.d.SetPrefix("[E] ")
+	l.d.Output(l.depth, content)
 	if l.v != nil {
-		l.v.SetPrefix("[E]")
-		l.v.Output(l.depth, fmt.Sprint(v...))
+		l.v.SetPrefix("[E] ")
+		l.v.Output(l.depth, content)
 	}
 }
 
