@@ -39,11 +39,13 @@ func (l *Logger) SetDepth(depth int) {
 
 // Print
 func (l *Logger) Println(v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&INFO <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprintln(v...)
 	l.d.SetPrefix("[I] ")
 	l.d.Output(l.depth, content)
@@ -54,11 +56,13 @@ func (l *Logger) Println(v ...interface{}) {
 }
 
 func (l *Logger) Printf(format string, v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&INFO <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprintf(format, v...)
 	l.d.SetPrefix("[I] ")
 	l.d.Output(l.depth, content)
@@ -69,11 +73,13 @@ func (l *Logger) Printf(format string, v ...interface{}) {
 }
 
 func (l *Logger) Print(v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&INFO <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprint(v...)
 	l.d.SetPrefix("[I] ")
 	l.d.Output(l.depth, content)
@@ -86,11 +92,13 @@ func (l *Logger) Print(v ...interface{}) {
 // debug
 
 func (l *Logger) Debugln(v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&DEBUG <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprintln(v...)
 	l.d.SetPrefix("[D] ")
 	l.d.Output(l.depth, content)
@@ -101,11 +109,13 @@ func (l *Logger) Debugln(v ...interface{}) {
 }
 
 func (l *Logger) Debugf(format string, v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&DEBUG <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprintf(format, v...)
 	l.d.SetPrefix("[D] ")
 	l.d.Output(l.depth, content)
@@ -116,11 +126,13 @@ func (l *Logger) Debugf(format string, v ...interface{}) {
 }
 
 func (l *Logger) Debug(v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&DEBUG <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprint(v...)
 	l.d.SetPrefix("[D] ")
 	l.d.Output(l.depth, content)
@@ -133,11 +145,13 @@ func (l *Logger) Debug(v ...interface{}) {
 // info
 
 func (l *Logger) Infoln(v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&INFO <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprintln(v...)
 	l.d.SetPrefix("[I] ")
 	l.d.Output(l.depth, content)
@@ -148,11 +162,13 @@ func (l *Logger) Infoln(v ...interface{}) {
 }
 
 func (l *Logger) Infof(format string, v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&INFO <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprintf(format, v...)
 	l.d.SetPrefix("[I] ")
 	l.d.Output(l.depth, content)
@@ -163,11 +179,13 @@ func (l *Logger) Infof(format string, v ...interface{}) {
 }
 
 func (l *Logger) Info(v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&INFO <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprint(v...)
 	l.d.SetPrefix("[I] ")
 	l.d.Output(l.depth, content)
@@ -180,11 +198,13 @@ func (l *Logger) Info(v ...interface{}) {
 // warn
 
 func (l *Logger) Warnln(v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&WARN <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprintln(v...)
 	l.d.SetPrefix("[W] ")
 	l.d.Output(l.depth, content)
@@ -195,11 +215,13 @@ func (l *Logger) Warnln(v ...interface{}) {
 }
 
 func (l *Logger) Warnf(format string, v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&WARN <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprintf(format, v...)
 	l.d.SetPrefix("[W] ")
 	l.d.Output(l.depth, content)
@@ -210,11 +232,13 @@ func (l *Logger) Warnf(format string, v ...interface{}) {
 }
 
 func (l *Logger) Warn(v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&WARN <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprint(v...)
 	l.d.SetPrefix("[W] ")
 	l.d.Output(l.depth, content)
@@ -227,11 +251,13 @@ func (l *Logger) Warn(v ...interface{}) {
 // error
 
 func (l *Logger) Errorln(v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&ERROR <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprintln(v...)
 	l.d.SetPrefix("[E] ")
 	l.d.Output(l.depth, content)
@@ -242,11 +268,13 @@ func (l *Logger) Errorln(v ...interface{}) {
 }
 
 func (l *Logger) Errorf(format string, v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&ERROR <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprintf(format, v...)
 	l.d.SetPrefix("[E] ")
 	l.d.Output(l.depth, content)
@@ -257,11 +285,13 @@ func (l *Logger) Errorf(format string, v ...interface{}) {
 }
 
 func (l *Logger) Error(v ...interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
 	if l.level&ERROR <= 0 {
 		return
 	}
+
+	l.mu.Lock()
+	defer l.mu.Unlock()
+
 	content := fmt.Sprint(v...)
 	l.d.SetPrefix("[E] ")
 	l.d.Output(l.depth, content)
