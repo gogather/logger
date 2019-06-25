@@ -3,6 +3,7 @@ package logger
 import (
 	"github.com/gogather/cleaner"
 	"io"
+	"os"
 	"path/filepath"
 	"time"
 )
@@ -14,6 +15,7 @@ type GroupLogger struct {
 	expire        time.Duration
 	flag          int
 	level         int
+	excludes      []string
 }
 
 // NewGroupLogger new a group logger manager
@@ -40,9 +42,22 @@ func NewGroupLogger(dir string, appName string, expire time.Duration, logSlice [
 	}
 
 	fc := cleaner.New(dir, gl.expire, time.Hour, -1)
+	fc.SetFilter(func(path string, info os.FileInfo) (willClean bool) {
+		for _, excludePath := range gl.excludes {
+			if excludePath == path {
+				return false
+			}
+		}
+		return true
+	})
 	fc.StartCleanTask()
 
 	return gl
+}
+
+// set excludes path
+func (gl *GroupLogger) SetExcludes(excludePath ...string) {
+	gl.excludes = excludePath
 }
 
 // default logger
