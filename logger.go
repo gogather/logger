@@ -97,10 +97,8 @@ func (l *Logger) Write(p []byte) (n int, err error) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 
-	l.d.SetPrefix("[I] ")
 	err = l.d.Output(l.depth, string(p))
 	if l.v != nil {
-		l.v.SetPrefix("[I] ")
 		err = l.v.Output(l.depth, string(p))
 	}
 	return len(p), err
