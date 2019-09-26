@@ -97,11 +97,11 @@ func (l *Logger) Write(p []byte) (n int, err error) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 
-	err = l.d.Output(l.depth, string(p))
+	n, err = l.d.Writer().Write(p)
 	if l.v != nil {
-		err = l.v.Output(l.depth, string(p))
+		n, err = l.v.Writer().Write(p)
 	}
-	return len(p), err
+	return n, err
 }
 
 // debug
